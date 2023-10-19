@@ -1,0 +1,172 @@
+{
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "Wscats.vue"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[sass]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[postcss]": {
+    "editor.defaultFormatter": "stylelint.vscode-stylelint"
+  },
+  "[yaml]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true,
+  },
+  "editor.formatOnSaveMode": "modificationsIfAvailable",
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.formatOnSave": true,
+  "javascript.validate.enable": false,
+  "javascript.format.enable": false,
+  "prettier.enable": false,
+  "eslint.format.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "vue",
+  ],
+  "eslint.options": {
+    "extensions": [
+      ".html",
+      ".js",
+      ".ts",
+      ".vue"
+    ]
+  },
+  "eslint.codeActionsOnSave.mode": "problems",
+  "testing.automaticallyOpenPeekView": "never",
+  "vue3snippets.enable-compile-vue-file-on-did-save-code": false,
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "postcss.validate": false,
+  "stylelint.enable": true,
+  "stylelint.validate": [
+    "css",
+    "scss",
+    "postcss"
+  ],
+  "css.lint.unknownAtRules": "ignore",
+  "html.format.enable": false,
+  "emmet.triggerExpansionOnTab": true,
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "postcss": "css"
+  },
+  "emmet.syntaxProfiles": {
+    "postcss": "css"
+  },
+  "files.exclude": {
+    "**/*.log": true,
+    "**/*.log*": true,
+    "**/dist": false
+  },
+  "files.associations": {
+    ".babelrc": "jsonc",
+    ".eslintrc": "jsonc",
+    ".markdownlintrc": "jsonc",
+    "*.config.js": "javascript",
+    "*.spec.js": "javascript",
+    "*.vue": "vue",
+    "*.scss": "scss"
+  },
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+  "files.autoSave": "onWindowChange",
+  "turboConsoleLog.quote": "'",
+  "turboConsoleLog.addSemicolonInTheEnd": true,
+  "todo-tree.highlights.defaultHighlight": {
+    "type": "text",
+    "opacity": 80
+  },
+  "todo-tree.highlights.customHighlight": {
+    "TODO": {
+      "icon": "check",
+      "iconColour": "#39c5cf",
+      "background": "#00575e79",
+      "gutterIcon": true
+    },
+    "FIXME": {
+      "foreground": "#f8f8f8",
+      "background": "#b82525",
+      "iconColour": "#dd7d00",
+      "gutterIcon": true
+    }
+  },
+  "cSpell.language": "en,es",
+  "cSpell.words": [
+    "apexcharts",
+    "Oidc",
+    "pinia",
+    "sparkline",
+    "toastr",
+    "Vite",
+    "vitejs",
+    "vitest",
+    "Vuex",
+    "xaxis"
+  ],
+  "i18n-ally.localesPaths": "src/locales",
+  "i18n-ally.extract.keyPrefix": "{fileNameWithoutExt}",
+  "i18n-ally.pathMatcher": "{locale}/{namespaces}.json",
+  "i18n-ally.dirStructure": "dir",
+  "i18n-ally.namespace": true,
+  "i18n-ally.enabledParsers": [
+    "ts",
+    "json"
+  ],
+  "i18n-ally.displayLanguage": "es",
+  "i18n-ally.sourceLanguage": "es",
+  "i18n-ally.extract.keyMaxLength": 145,
+  "i18n-ally.keystyle": "nested",
+  "autoimport.absolute": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#19858c",
+    "activityBar.background": "#19858c",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#ec93e6",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#19858c",
+    "statusBar.background": "#115c61",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#19858c",
+    "statusBarItem.remoteBackground": "#115c61",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#115c61",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#115c6199",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+}
