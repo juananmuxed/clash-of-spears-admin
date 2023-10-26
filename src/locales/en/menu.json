@@ -1,4 +1,7 @@
 {
   "login": "Login",
-  "home": "Home"
+  "home": "Home",
+  "users": "Users",
+  "config": "Configuration",
+  "expansions": "Expansions"
 }

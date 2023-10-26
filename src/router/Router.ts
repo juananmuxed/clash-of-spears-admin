@@ -16,6 +16,14 @@ const routes: RouteRecordRaw[] = [
     ],
   },
   {
+    path: '/login',
+    name: 'login',
+    meta: {
+      titleTag: 'menu.login',
+    },
+    component: () => import('src/views/LoginView.vue'),
+  },
+  {
     path: '/:pathMatch(.*)*',
     redirect: '/',
   },
