@@ -1,4 +1,4 @@
-import { Quasar } from "quasar";
+import { Quasar, Notify, Dialog } from "quasar";
 import { App } from "vue";
 import iconSet from 'quasar/icon-set/fontawesome-v6'
 
@@ -8,7 +8,16 @@ import 'quasar/src/css/index.sass';
 
 export const installQuasar = (app: App) => {
   app.use(Quasar, {
-    plugins: {},
+    plugins: {
+      Notify,
+      Dialog
+    },
     iconSet: iconSet,
+    config: {
+      notify: {
+        position: 'bottom-right',
+        color: 'secondary'
+      }
+    }
   })
 };
