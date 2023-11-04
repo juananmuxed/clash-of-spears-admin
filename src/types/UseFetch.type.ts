@@ -1,6 +1,7 @@
 import { FetchResponse } from 'src/models/fetch/FetchResponse';
 import { Pagination } from 'src/models/fetch/Pagination';
 import { ErrorDialogHandler } from 'src/utils/ErrorHandler';
+import { MemoizeParams } from 'src/utils/Memoize';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Fetch = (...args: any) => Promise<FetchResponse<any>>
@@ -19,6 +20,7 @@ export interface FetchOptions<T extends Fetch> {
   /**
    * @desc Se usa para mantener en memoria la respuesta y evitar peticiones
    */
+  readonly useMemoize?: MemoizeParams | string;
   readonly useDialogError?: ErrorDialogHandler;
   readonly onSuccess?: (response: Readonly<FetchResponse<Data<T>>>) => void;
   readonly onError?: (response: Readonly<FetchResponse<Data<T>>>) => void;

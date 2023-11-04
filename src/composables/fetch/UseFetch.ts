@@ -6,6 +6,39 @@ import { FetchResponse } from 'src/models/fetch/FetchResponse';
 import { errorFetchResponse } from 'src/data/default/FetchResponse';
 import { errorDialogHandler, notifyResponseHandler } from 'src/utils/ErrorHandler';
 import { is } from 'src/utils/Is';
+import { MemoizeParams, memoize } from 'src/utils/Memoize';
+
+const utilIs = is();
+
+function fetchMemoized<T extends Fetch>(request: T, $options: FetchOptions<T>, onUpdate: (newValue: Awaited<ReturnType<T>>) => void) {
+  let _request = request as memoize<T> | ((...args: Parameters<T>) => Promise<FetchResponse<T>>);
+
+  if ($options.useMemoize) {
+    const expiresIn = 2000;
+    const memoizeKey = utilIs.string($options.useMemoize) ? $options.useMemoize : $options.useMemoize?.key || '';
+
+    if (memoizeKey) {
+      const memoizeConfig = ($options.useMemoize as MemoizeParams).config;
+      const memoized = memoize<T>(memoizeKey, request, { expiresIn, ...memoizeConfig });
+      _request = memoized;
+
+      if (memoizeConfig?.globalData) {
+        let timer: NodeJS.Timeout | undefined;
+        watch(memoized.current(), (newVal) => {
+          if (newVal) {
+            clearTimeout(timer);
+
+            timer = setTimeout(() => {
+              onUpdate(newVal);
+            }, 10);
+          }
+        }, { deep: true });
+      }
+    }
+  }
+
+  return _request;
+}
 
 /**
  * @summary Custom hook that provides a simple way to handle fetching data from an API. It aims to simplify the process of making API requests and handling the responses by providing a set of options that can be customized to fit the specific needs of the application.
@@ -33,8 +66,6 @@ export function useFetch<T extends Fetch>(request: T, options?: Partial<FetchOpt
     immediate: false, initialData: undefined, showError: true, ...options,
   };
 
-  const utilIs = is();
-
   const isFinished = ref(false);
   const isFetching = ref(false);
 
@@ -46,12 +77,25 @@ export function useFetch<T extends Fetch>(request: T, options?: Partial<FetchOpt
     isFetching.value = isLoading;
     isFinished.value = !isLoading;
   };
+
+
+  const _request = fetchMemoized(
+    request,
+    $options,
+    (newValue) => {
+      if (!isFetching.value && newValue.status) {
+        response.value = newValue;
+        data.value = response.value.isError ? undefined : response.value.data;
+      }
+    },
+  );
+
   const execute = async (...payload: Parameters<T>) => {
     loading(true);
 
     const $payload = utilIs.array(payload) ? payload : [payload ?? []] as Parameters<T>;
     try {
-      response.value = await request($payload);
+      response.value = await _request(...$payload);
     } catch (error) {
       response.value = errorFetchResponse(error);
     }
