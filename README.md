@@ -1,50 +1,13 @@
-# ✨ Vue3 Template
+# ⚔️ Clash of spears Admin web
 
 ### Github status
 
-![GitHub issues by-label](https://img.shields.io/github/issues/juananmuxed/vue-m-template/bug?label=Bugs%20Opened&logo=github) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/juananmuxed/vue-m-template?label=Activity&logo=github) ![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/juananmuxed/vue-m-template?label=Version&logo=github)
-
-## 🎱 Installation
-
-Clone repo
-```bash
-git clone https://github.com/juananmuxed/vue-m-template.git
-```
-Install dependencies
-
-```bash
-cd vue-m-template
-npm i
-```
-Start developing
-
-```bash
-npm run dev
-```
-
-Or build
-
-```bash
-npm run build
-```
-
-## 🖥️ Recommended IDE Setup
-
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
-
+![GitHub issues by-label](https://img.shields.io/github/issues/juananmuxed/clash-of-spears-admin/bug?label=Bugs%20Opened&logo=github) ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/juananmuxed/clash-of-spears-admin?label=Activity&logo=github) ![GitHub package.json version (subfolder of monorepo)](https://img.shields.io/github/package-json/v/juananmuxed/clash-of-spears-admin?label=Version&logo=github)
 
 ## 🏗 Built with
 
-- [Vue](https://vuejs.org/)
-- [Vue router](https://router.vuejs.org/)
-- [Pinia](https://pinia.vuejs.org/) (not required)
-- [Vue i18n](https://vue-i18n.intlify.dev/)
-- [Quasar](https://quasar.dev/)
-
-## 🛠️ Assets
-
-### Fonts
-- [Inter](https://rsms.me/inter/)
+- [Vue 3 Template](https://github.com/juananmuxed/vue-m-template)
+- [Axios](https://axios-http.com/es/docs/intro)
 
 ## ☕️ Buy Me a Coffee
 
@@ -53,7 +16,7 @@ npm run build
 ## 🐛 Report a bug
 
 Please follow one of this links to report a bug:
-- [Github issues](https://github.com/juananmuxed/vue-m-template/issues)
+- [Github issues](https://github.com/juananmuxed/clash-of-spears-admin/issues)
 - [Discord](https://discord.gg/88rzwfU)
 
 ## 📌 Versions
