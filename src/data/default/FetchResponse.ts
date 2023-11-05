@@ -6,8 +6,8 @@ import { HttpStatus } from 'src/models/fetch/HttpStatus';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const defaultListResponseData = <T = any>(): ListApiResponse<T> => [];
 export const defaultListPaginatedResponseData = (): Pagination => ({
-  sortBy: undefined,
-  descending: true,
+  sortBy: 'id',
+  descending: false,
   page: 1,
   rowsPerPage: 0,
   rowsNumber: 0,

@@ -87,31 +87,21 @@ export class ClientFactory {
 }
 
 function getErrorMessageResponse(dataMessage?: unknown | string[] | string | MultiPartRequest) {
-  let message: undefined | string[];
+  let message: undefined | string;
 
   if (dataMessage) {
-    if (Array.isArray(dataMessage) && dataMessage.length) {
-      message = [dataMessage.pop()];
-    } else if (utilIs.string(dataMessage)) {
-      message = [dataMessage];
-    } else if (utilIs.object(dataMessage) && 'errors' in dataMessage) {
-      const { errors } = dataMessage;
-      if (Array.isArray(errors)) {
-        // Convention with the back where the "errors" property is standardized.
-        // And the types "CsvResults" and "ErrorsAndCorrect".
-        message = errors;
-      } else {
-        // Internal server errors
-        message = errors[''];
-      }
+    if (utilIs.string(dataMessage)) {
+      message = dataMessage;
+    } else if (utilIs.object(dataMessage) && 'message' in dataMessage) {
+      message = dataMessage.message;
     }
   }
 
-  return message?.filter((m) => m);
+  return message;
 }
 
 export function generateErrorFetchResponse<T = undefined>(error: AxiosError, data?: T) {
-  let message = error?.message ? [error.message] : undefined;
+  let message = error?.message ? error.message : undefined;
 
   if (error?.config?.signal?.aborted) {
     message = undefined;
@@ -125,7 +115,7 @@ export function generateErrorFetchResponse<T = undefined>(error: AxiosError, dat
 }
 
 export function generateDataFetchResponse<T = undefined>(data: T, response: AxiosResponse) {
-  let messageError: { isError?: boolean; message?: string[] } = {};
+  let messageError: { isError?: boolean; message?: string } = {};
 
   if ((utilIs.array(response.data?.errors) && response.data?.errors.length) || response.status >= 300) {
     messageError = {
