@@ -6,7 +6,10 @@
     "dev": "vite",
     "dev:host": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "patch": "npm version patch -m \"🩹 Patch upgrade to version %s\" & git push --tags",
+    "minor": "npm version minor -m \"💊 Minor upgrade to version %s\" & git push --tags",
+    "major": "npm version major -m \"🎉 Major upgrade to version %s\" & git push --tags"
   },
   "dependencies": {
     "@quasar/extras": "^1.12.3",
