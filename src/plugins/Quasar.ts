@@ -17,7 +17,8 @@ export const installQuasar = (app: App) => {
       notify: {
         position: 'bottom-right',
         color: 'secondary'
-      }
+      },
+      dark: 'auto'
     }
   })
 };
