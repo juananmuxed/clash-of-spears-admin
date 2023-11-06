@@ -31,13 +31,35 @@
             </QList>
           </QMenu>
         </QBtn>
-        <QBtn
-          flat
-          round
-          dense
-          :icon="!$q.dark.isActive ? 'fas fa-lightbulb' : 'far fa-lightbulb'"
-          @click="$q.dark.toggle"
-        />
+        <QBtn icon="fas fa-user" round flat>
+          <QMenu transition="jump-up">
+            <QList>
+              <QItem>
+                <QItemSection>
+                  <QItemLabel>{{ user.tokenPayload?.username }}</QItemLabel>
+                  <QItemLabel caption>{{ user.tokenPayload?.email }}</QItemLabel>
+                </QItemSection>
+              </QItem>
+              <QSeparator />
+              <QItem clickable @click="$q.dark.toggle">
+                <QItemSection avatar>
+                  <QIcon :name="!$q.dark.isActive ? 'fas fa-lightbulb' : 'far fa-lightbulb'" />
+                </QItemSection>
+                <QItemSection>
+                  {{ $q.dark.isActive ? $t('common.buttons.dark') : $t('common.buttons.light') }}
+                </QItemSection>
+              </QItem>
+              <QItem v-close-popup clickable @click="user.logout({ type: 'info', message: $t('success.logoutSuccess')})">
+                <QItemSection avatar>
+                  <QIcon name="fas fa-right-from-bracket" />
+                </QItemSection>
+                <QItemSection>
+                  {{ $t('common.buttons.logout') }}
+                </QItemSection>
+              </QItem>
+            </QList>
+          </QMenu>
+        </QBtn>
       </QToolbar>
     </QHeader>
 
@@ -84,8 +106,10 @@ import { ref } from "vue";
 import { loadLanguageAsync, availableLocales } from "src/plugins/I18n";
 import { getMenu } from "src/router/MenuRoutes";
 import { useQuasar } from "quasar";
+import { useUserStore } from "src/stores/UseUserStore";
 
 const $q = useQuasar();
+const user = useUserStore();
 
 const leftDrawerOpen = ref(true);
 </script>

@@ -17,16 +17,25 @@ const routes: RouteRecordRaw[] = [
       titleTag: 'menu.home',
       icon: 'fas fa-house',
     },
-    component: () => import('src/views/SampleView.vue'),
+    component: () => import('src/views/WelcomeView.vue'),
   },
   {
-    path: '/expansions',
+    path: 'expansions',
     name: 'expansions',
     meta: {
       titleTag: 'menu.expansions',
       icon: 'fas fa-bolt',
     },
-    component: () => import('src/views/SampleView.vue'),
+    component: () => import('src/views/weapons/WeaponsView.vue'),
+  },
+  {
+    path: 'weapons',
+    name: 'weapons',
+    meta: {
+      titleTag: 'menu.weapons',
+      icon: 'fas fa-shield-halved',
+    },
+    component: () => import('src/views/weapons/WeaponsView.vue'),
   },
   {
     path: 'config',
@@ -37,13 +46,13 @@ const routes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: '/users',
+        path: 'users',
         name: 'users',
         meta: {
           titleTag: 'menu.users',
           icon: 'fas fa-users',
         },
-        component: () => import('src/views/SampleView.vue'),
+        component: () => import('src/views/weapons/WeaponsView.vue'),
       },
     ]
   },

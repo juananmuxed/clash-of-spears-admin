@@ -6,6 +6,7 @@ import {
 } from 'vue-router';
 import { MenuRoutes } from './MenuRoutes';
 import { useTitle } from 'src/composables/UseTitle';
+import { useUserStore } from 'src/stores/UseUserStore';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -39,13 +40,24 @@ export const installRouter = (app: App) => {
 };
 
 let titleRouteTimeout: NodeJS.Timeout;
-const title = useTitle();
 
 router.beforeEach((to, from, next) => {
+  const title = useTitle();
+  const user = useUserStore();
+
   titleRouteTimeout && clearTimeout(titleRouteTimeout);
   titleRouteTimeout = setTimeout(() => {
     title.setTitle(to);
   }, 200);
 
-  next();
+  const publicPages = ['login'];
+  const authRequired = !publicPages.includes(to.name?.toString() || '');
+
+  if (!authRequired && user.validToken) next({ name: 'home' });
+
+  if (authRequired && !user.validToken) {
+    next({ name: 'login' });
+  } else {
+    next();
+  }
 })
