@@ -144,8 +144,8 @@
     "ts",
     "json"
   ],
-  "i18n-ally.displayLanguage": "es",
-  "i18n-ally.sourceLanguage": "es",
+  "i18n-ally.displayLanguage": "en",
+  "i18n-ally.sourceLanguage": "en",
   "i18n-ally.extract.keyMaxLength": 145,
   "i18n-ally.keystyle": "nested",
   "autoimport.absolute": true,
