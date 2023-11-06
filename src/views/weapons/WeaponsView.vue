@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import GenericView from 'src/components/common/GenericView.vue';
 import { useWeapons } from 'src/composables/client/UseWeapons';
 import { GenericViewKey } from 'src/types/Symbols';
+import { columns } from './TableData'
 
 const weapons = useWeapons();
 
@@ -11,5 +11,5 @@ provide(GenericViewKey, {
 </script>
 
 <template>
-  <GenericView />
+  <GenericView :columns="columns" />
 </template>
