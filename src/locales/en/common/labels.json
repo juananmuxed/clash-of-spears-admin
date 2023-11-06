@@ -1,0 +1,11 @@
+{
+  "id": "Id",
+  "name": "Name",
+  "rangeShort": "Range short",
+  "rangeLong": "Range long",
+  "saveModification": "Save modification",
+  "initiative": "Initiative",
+  "bookPage": "Book page",
+  "expansion": "Expansion",
+  "types": "Types"
+}
