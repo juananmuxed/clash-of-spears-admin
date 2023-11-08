@@ -111,5 +111,5 @@ import { useUserStore } from "src/stores/UseUserStore";
 const $q = useQuasar();
 const user = useUserStore();
 
-const leftDrawerOpen = ref(true);
+const leftDrawerOpen = ref(false);
 </script>
