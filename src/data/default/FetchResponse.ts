@@ -9,7 +9,7 @@ export const defaultListPaginatedResponseData = (): Pagination => ({
   sortBy: 'id',
   descending: false,
   page: 1,
-  rowsPerPage: 0,
+  rowsPerPage: 10,
   rowsNumber: 0,
 });
 export const emptyFetchResponse = (): Promise<FetchResponse<undefined>> => new Promise((resolve) => {

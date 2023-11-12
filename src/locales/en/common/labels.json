@@ -9,5 +9,7 @@
   "expansion": "Expansion",
   "email": "Email",
   "password": "Password",
-  "types": "Types"
+  "types": "Types",
+  "edit": "Edit",
+  "remove": "Remove"
 }
