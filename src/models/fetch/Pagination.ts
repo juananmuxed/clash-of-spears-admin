@@ -1,8 +1,7 @@
 export type Pagination = {
-  sortBy?: string;
+  sortBy: string | null;
   rowsNumber?: number;
-  descending?: boolean;
-  page?: number;
-  rowsPerPage?: number;
-  availableSortProperties?: string[];
+  descending: boolean;
+  page: number;
+  rowsPerPage: number;
 }

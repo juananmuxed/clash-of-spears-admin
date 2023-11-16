@@ -63,7 +63,7 @@ export const columns = [
     name: 'types',
     label: t('common.labels.types'),
     field: 'types',
-    align: 'left'
+    align: 'left',
   },
   {
     name: 'options',

@@ -2,14 +2,21 @@
 import { useWeapons } from 'src/composables/client/UseWeapons';
 import { GenericViewKey } from 'src/types/Symbols';
 import { columns } from './TableData'
+import { Weapon } from 'src/models/api/Weapons';
+import { GenericView } from 'src/components/common/GenericView';
 
 const weapons = useWeapons();
 
-provide(GenericViewKey, {
-  tableService: weapons.getWeaponsPaginated
+provide<GenericView<Weapon>>(GenericViewKey, {
+  tableService: weapons.getWeaponsPaginated,
+  createService: weapons.createWeapon,
+  updateService: weapons.updateWeapon,
+  removeService: weapons.deleteWeapon,
 })
+
+const { GenericViewVue } = GenericView<Weapon>();
 </script>
 
 <template>
-  <GenericView :columns="columns" />
+  <GenericViewVue :columns="columns" :title="$t($route.meta.titleTag)" />
 </template>

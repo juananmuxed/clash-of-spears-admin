@@ -1,4 +1,4 @@
-import { GenericView } from "src/models/common/Generics";
+import { GenericView } from "src/components/common/GenericView";
 import { InjectionKey } from "vue";
 
-export const GenericViewKey: InjectionKey<GenericView<any[]>> = Symbol('_GenericView')
+export const GenericViewKey: InjectionKey<GenericView<Record<string, unknown>>> = Symbol('_GenericView')
