@@ -7,8 +7,6 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    GenericTable: typeof import('./components/common/GenericTable.vue')['default']
-    GenericViewOld: typeof import('./components/common/GenericViewOld.vue')['default']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     MenuItem: typeof import('./components/menu/MenuItem.vue')['default']
     MenuParent: typeof import('./components/menu/MenuParent.vue')['default']

@@ -13,10 +13,8 @@ export const useUserStore = defineStore('user', () => {
   const { decodePayload } = jwt();
 
   const localStorageToken = localStorage.getItem(LOCAL_STORAGE.JWT);
-  const localStoreLastToken = localStorage.getItem(LOCAL_STORAGE.LAST_TOKEN);
 
   const token = ref<UserResponse | undefined>(localStorageToken ? JSON.parse(localStorageToken) : undefined);
-  const lastToken = ref<number | undefined>(localStoreLastToken ? Number(localStoreLastToken) : undefined);
 
   const tokenPayload = computed(() => (token.value ? decodePayload<TokenItem & { exp: number }>(token.value.token) : undefined));
 
@@ -26,7 +24,10 @@ export const useUserStore = defineStore('user', () => {
     password: '',
   });
 
-  const validToken = computed(() => token.value && lastToken.value && Date.now() < (tokenPayload.value?.exp || 0) + lastToken.value);
+  const validToken = computed(() => token.value
+    && tokenPayload.value
+    && tokenPayload.value.exp
+    && Date.now() < tokenPayload.value.exp * 1000);
 
   const isLoading = computed(() => auth.login.isFetching
     || auth.refreshToken.isFetching
@@ -35,11 +36,6 @@ export const useUserStore = defineStore('user', () => {
   watch(token, (newValue: UserResponse | undefined) => (newValue !== undefined
     ? localStorage.setItem(LOCAL_STORAGE.JWT, JSON.stringify(newValue))
     : localStorage.removeItem(LOCAL_STORAGE.JWT)));
-
-  watch(lastToken, (newValue: number | undefined) => (newValue !== undefined
-    ? localStorage.setItem(LOCAL_STORAGE.LAST_TOKEN, JSON.stringify(newValue))
-    : localStorage.removeItem(LOCAL_STORAGE.LAST_TOKEN)));
-
 
   function removeToken() {
     token.value = undefined;
@@ -92,8 +88,8 @@ export const useUserStore = defineStore('user', () => {
   }
 
   function startRefreshToken() {
-    if (tokenPayload.value !== undefined && lastToken.value !== undefined) {
-      const time = tokenPayload.value.exp + lastToken.value - Date.now();
+    if (tokenPayload.value) {
+      const time = tokenPayload.value.exp * 1000 - Date.now() - 60 * 1000;
       timeout.value = setTimeout(refreshTokenHandler, time);
     }
   }
@@ -108,7 +104,6 @@ export const useUserStore = defineStore('user', () => {
     token.value = auth.login.data;
 
     if (token.value) {
-      lastToken.value = Date.now();
       startRefreshToken();
 
       await router.push({ path: '/' });
