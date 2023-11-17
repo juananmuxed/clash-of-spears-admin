@@ -1,3 +1,8 @@
 {
-  "adminForClash": "Administration page for Clash of Spears API"
+  "adminForClash": "Administration page for Clash of Spears API",
+  "newItem": "Create {item}",
+  "editItem": "Edit {item}",
+  "deleteItem": "Delete {item}",
+  "item": "item",
+  "weapons": "weapon | weapons"
 }

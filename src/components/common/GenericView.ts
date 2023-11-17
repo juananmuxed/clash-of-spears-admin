@@ -1,4 +1,5 @@
 import {
+  Dialog,
   QBtn,
   QBtnProps,
   QCard,
@@ -21,6 +22,7 @@ import { GenericViewKey } from "src/types/Symbols";
 import { defaultListPaginatedResponseData } from 'src/data/default/FetchResponse';
 import { t } from "src/plugins/I18n";
 import { is } from "src/utils/Is";
+import { genericFormDialog } from "./GenericFormDialog";
 
 export type GenericView<T extends Record<string, any>> = _GenericViewType<T>;
 export const GenericView = <T extends Record<string, any> = Record<string, any>>() => {
@@ -30,12 +32,14 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
       props: {
         columns: { type: Object as PropType<QTableColumn<T>[]>, required: true },
         title: { type: String as PropType<string>, default: '' },
+        dialogTitle: { type: String as PropType<string>, default: undefined },
         pagination: {
           type: Object as PropType<Pagination>,
           default: undefined,
         },
       },
-      setup(props, { slots }) {
+
+      setup(props) {
         const $scope = inject(GenericViewKey) as GenericView<T>;
 
         if (!$scope.tableService) {
@@ -44,14 +48,18 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
 
         const utilIs = is();
 
-        const columns = toRef(props, 'columns');
-        const loading = computed(() => $scope.tableService.isFetching)
+        const loading = computed(() => $scope.tableService.isFetching || $scope.removeService.isFetching)
         const pagination = ref<Pagination>({
           ...defaultListPaginatedResponseData(),
           sortBy: '',
           rowsNumber: 'pagination' in $scope.tableService ? defaultListPaginatedResponseData().rowsPerPage : undefined,
           ...props.pagination,
         });
+
+        const formDialog = genericFormDialog<T>({
+          $scope,
+          dialogTitle: props.dialogTitle,
+        })
 
         async function onRequest() {
           if (!loading.value) {
@@ -67,7 +75,24 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
 
         onRequest();
 
-        function renderBodyCellOptions(row: Record<string, any>) {
+        async function onRemove(item: T) {
+          await $scope.removeService.execute(item);
+          $scope.tableService.execute()
+        }
+
+        function removeItem(item: T) {
+          if (!loading.value) {
+            Dialog.create({
+              title: t('common.titles.deleteItem', { item: props.dialogTitle }),
+              message: t('common.messages.confirmDelete', { item: props.dialogTitle, id: item.id }),
+              cancel: true,
+              persistent: true,
+            })
+              .onOk(() => onRemove(item))
+          }
+        }
+
+        function renderBodyCellOptions(row: T) {
           return h(
             QTd,
             { class: 'center q-gutter-sm' },
@@ -79,6 +104,7 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
                   unelevated: true,
                   dense: true,
                   color: 'primary',
+                  onClick: () => formDialog.openEditDialog(row)
                 } as QBtnProps,
                 () => [
                   h(QIcon, { name: 'fas fa-pen-to-square', size: 'xs' }),
@@ -92,6 +118,7 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
                   unelevated: true,
                   dense: true,
                   color: 'negative',
+                  onClick: () => removeItem(row),
                 } as QBtnProps,
                 () => [
                   h(QIcon, { name: 'fas fa-trash', size: 'xs' } as QIconProps),
@@ -102,7 +129,7 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
           )
         }
 
-        function renderBodyCell(row: Record<string, any>) {
+        function renderBodyCell(row: T) {
           const val = row.value;
           return utilIs.array(val) ? h(
             QTd,
@@ -126,7 +153,7 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
             QCard,
             { class: 'q-ma-lg' },
             () => [
-              h(QCardSection, () => h('div', { class: 'text-h5' }, props.title)),
+              h(QCardSection, () => h('div', { class: 'text-h5 text-uppercase' }, props.title)),
               h(
                 QCardSection,
                 () => h(
@@ -138,7 +165,7 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
                     binaryStateSort: true,
                     flat: true,
                     rowKey: 'id',
-                    loading: $scope.tableService.isFetching,
+                    loading: loading.value,
                     rows: $scope.tableService.data,
                     rowsPerPageOptions: [5, 10, 15, 20, 50],
                     onRequest: (request) => {
@@ -147,20 +174,22 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
                     }
                   } as QTableProps,
                   {
-                    'body-cell-options': (row: Record<string, any>) => renderBodyCellOptions(row),
-                    'body-cell': (row: Record<string, any>) => renderBodyCell(row),
+                    'body-cell-options': (body: { row: T }) => renderBodyCellOptions(body.row),
+                    'body-cell': (row: T) => renderBodyCell(row),
                   },
                 )
               ),
               h(QCardActions, { align: 'right' } as QCardActionsProps,
-                () => h(QBtn, {
+                $scope.createService ? () => h(QBtn, {
                   label: t('common.buttons.add'),
                   rounded: true,
                   color: 'positive',
                   unelevated: true,
-                  padding: 'sm xl'
-                } as QBtnProps)
+                  padding: 'sm xl',
+                  onClick: formDialog.openCreateDialog
+                } as QBtnProps) : undefined
               ),
+              formDialog.getDialog()
             ],
           );
         };

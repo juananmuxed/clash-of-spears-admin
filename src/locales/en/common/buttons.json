@@ -3,5 +3,7 @@
   "light": "Light",
   "dark": "Dark",
   "logout": "Logout",
-  "add": "Add"
+  "add": "Add",
+  "edit": "Edit",
+  "create": "Create"
 }

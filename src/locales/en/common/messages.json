@@ -1,5 +1,6 @@
 {
   "correctlyCreated": "Correctly created",
   "correctlyUpdated": "Correctly updated",
-  "correctlyDeleted": "Correctly deleted"
+  "correctlyDeleted": "Correctly deleted",
+  "confirmDelete": "You are about to delete {item} {id}"
 }
