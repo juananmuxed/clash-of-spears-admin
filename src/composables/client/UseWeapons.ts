@@ -1,6 +1,5 @@
 import { WeaponsApi } from "src/services/api/WeaponsApi"
 import { useFetch } from "../fetch/UseFetch"
-import { Weapon } from "src/models/api/Weapons";
 import { t } from "src/plugins/I18n";
 import { useFetchPaginated } from "../fetch/UseFetchPaginated";
 
@@ -9,18 +8,15 @@ export const useWeapons = () => {
 
   const getWeapons = useFetch(weaponsApi.getWeapons);
 
-  const createWeapon = useFetch(
-    async (weapon: Weapon) => weaponsApi.createWeapon(weapon),
+  const createWeapon = useFetch(weaponsApi.createWeapon,
     { successMessage: t('common.messages.correctlyCreated') },
   );
 
-  const updateWeapon = useFetch(
-    async (weapon: Weapon) => weaponsApi.updateWeapon(weapon),
+  const updateWeapon = useFetch(weaponsApi.updateWeapon,
     { successMessage: t('common.messages.correctlyUpdated') },
   );
 
-  const deleteWeapon = useFetch(
-    async (weapon: Weapon) => weaponsApi.deleteWeapon(weapon),
+  const deleteWeapon = useFetch(weaponsApi.deleteWeapon,
     { successMessage: t('common.messages.correctlyDeleted') },
   );
 

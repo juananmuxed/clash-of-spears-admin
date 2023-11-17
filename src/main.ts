@@ -6,7 +6,7 @@ import { installPinia } from './plugins/Pinia'
 import { installQuasar } from './plugins/Quasar'
 import { installI18n } from './plugins/I18n'
 
-const app = createApp(App)
+const app = createApp(App);
 
 installI18n(app);
 installPinia(app);

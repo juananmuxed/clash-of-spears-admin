@@ -2,14 +2,17 @@ import { useTitle } from "src/composables/UseTitle";
 import { LOCAL_STORAGE } from "src/constants/Keys";
 import { App } from "vue";
 import { createI18n } from "vue-i18n";
+import en from 'src/locales/en/en'
 
 import type { Locale } from "vue-i18n";
 
+type MessageType = typeof en;
+
 export const i18n = createI18n({
   legacy: false,
-  locale: "",
+  locale: localStorage.getItem(LOCAL_STORAGE.LANG) || 'en',
   fallbackLocale: localStorage.getItem(LOCAL_STORAGE.LANG) || 'en',
-  messages: {},
+  messages: { en },
 });
 
 const localesMap = Object.fromEntries(
@@ -17,7 +20,7 @@ const localesMap = Object.fromEntries(
     path.match(/([\w-]*)\.ts$/)?.[1],
     loadLocale,
   ])
-) as Record<Locale, () => Promise<{ default: Record<string, string> }>>;
+) as Record<Locale, () => Promise<{ default: MessageType }>>;
 
 const languagesLabels: Record<string,string> = {
   en: 'English',
@@ -31,7 +34,7 @@ const loadedLanguages: string[] = [];
 function setI18nLanguage(lang: Locale) {
   const title = useTitle();
 
-  i18n.global.locale.value = lang;
+  (i18n.global.locale as Ref).value = lang;
   localStorage.setItem(LOCAL_STORAGE.LANG, lang);
   if (typeof document !== "undefined") {
     document.querySelector("html")?.setAttribute("lang", lang);
@@ -41,7 +44,7 @@ function setI18nLanguage(lang: Locale) {
 }
 
 export async function loadLanguageAsync(lang: string): Promise<Locale> {
-  if (i18n.global.locale.value === lang) {
+  if ((i18n.global.locale as Ref).value === lang) {
     return setI18nLanguage(lang);
   }
 
@@ -50,7 +53,7 @@ export async function loadLanguageAsync(lang: string): Promise<Locale> {
   }
 
   const messages = await localesMap[lang]();
-  i18n.global.setLocaleMessage(lang, messages.default);
+  i18n.global.setLocaleMessage(lang, messages.default as MessageType);
   loadedLanguages.push(lang);
   return setI18nLanguage(lang);
 }

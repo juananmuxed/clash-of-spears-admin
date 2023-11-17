@@ -1,6 +1,7 @@
 import menu from './menu.json';
 import success from './success.json';
 import warnings from './warnings.json';
+import errors from './errors.json';
 import rules from './rules.json';
 import titles from './common/titles.json';
 import messages from './common/messages.json';
@@ -11,6 +12,7 @@ export default {
   menu,
   success,
   warnings,
+  errors,
   rules,
   common: {
     titles,
