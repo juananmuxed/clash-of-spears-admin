@@ -2,6 +2,7 @@ import { WeaponsApi } from "src/services/api/WeaponsApi"
 import { useFetch } from "../fetch/UseFetch"
 import { t } from "src/plugins/I18n";
 import { useFetchPaginated } from "../fetch/UseFetchPaginated";
+import { useFetchSelect } from "../fetch/UseFetchSelect";
 
 export const useWeapons = () => {
   const weaponsApi = new WeaponsApi();
@@ -20,7 +21,9 @@ export const useWeapons = () => {
     { successMessage: t('common.messages.correctlyDeleted') },
   );
 
-  const getWeaponsPaginated = useFetchPaginated(weaponsApi.getWeaponsPaginated)
+  const getWeaponsPaginated = useFetchPaginated(weaponsApi.getWeaponsPaginated);
+
+  const getWeaponTypesSelect = useFetchSelect(weaponsApi.getWeaponTypes, { optionLabel: 'name' })
 
   return {
     getWeapons,
@@ -28,5 +31,6 @@ export const useWeapons = () => {
     updateWeapon,
     deleteWeapon,
     getWeaponsPaginated,
+    getWeaponTypesSelect,
   }
 }

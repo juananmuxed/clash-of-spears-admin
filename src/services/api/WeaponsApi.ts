@@ -1,4 +1,4 @@
-import { Weapon } from "src/models/api/Weapons";
+import { Weapon, WeaponType } from "src/models/api/Weapons";
 import { Pagination } from "src/models/fetch/Pagination";
 import { clientApi } from "src/plugins/Axios";
 
@@ -22,6 +22,10 @@ export class WeaponsApi {
   }
 
   async getWeaponsPaginated(pagination: Pagination) {
-    return clientApi.getListPaginatedClient<Weapon, Pagination>(controller, 'admin', pagination)
+    return clientApi.getListPaginatedClient<Weapon, Pagination>(controller, 'admin', pagination);
+  }
+
+  async getWeaponTypes() {
+    return clientApi.getListClient<WeaponType>(controller, 'types');
   }
 }

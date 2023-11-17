@@ -14,6 +14,6 @@ export type Weapon = {
   initiative?: number;
   bookPage: number;
   expansionId: number;
-  book: Expansion;
+  book?: Expansion;
   types: WeaponType[];
 }
