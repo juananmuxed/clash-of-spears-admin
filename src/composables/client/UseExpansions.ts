@@ -9,7 +9,7 @@ export const useExpansions = () => {
 
   const getExpansions = useFetch(expansionsApi.getExpansions);
 
-  const getExpansionsSelect = useFetchSelect(expansionsApi.getExpansions, { optionLabel: 'name' })
+  const getExpansionsSelect = useFetchSelect(expansionsApi.getExpansions, { optionLabel: 'book' })
 
   const createExpansion = useFetch(expansionsApi.createExpansion,
     { successMessage: t('common.messages.correctlyCreated') },
