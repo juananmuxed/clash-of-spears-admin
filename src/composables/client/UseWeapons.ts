@@ -23,7 +23,9 @@ export const useWeapons = () => {
 
   const getWeaponsPaginated = useFetchPaginated(weaponsApi.getWeaponsPaginated);
 
-  const getWeaponTypesSelect = useFetchSelect(weaponsApi.getWeaponTypes, { optionLabel: 'name' })
+  const getWeaponTypesSelect = useFetchSelect(weaponsApi.getWeaponTypes, { optionLabel: 'name' });
+
+  const postWeaponsBulk = useFetch(weaponsApi.postWeaponsBulk);
 
   return {
     getWeapons,
@@ -32,5 +34,6 @@ export const useWeapons = () => {
     deleteWeapon,
     getWeaponsPaginated,
     getWeaponTypesSelect,
+    postWeaponsBulk,
   }
 }

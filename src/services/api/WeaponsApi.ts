@@ -28,4 +28,8 @@ export class WeaponsApi {
   async getWeaponTypes() {
     return clientApi.getListClient<WeaponType>(controller, 'types');
   }
+
+  async postWeaponsBulk(file: File) {
+    return clientApi.postMultiPartClient(controller, 'bulk', { file })
+  }
 }

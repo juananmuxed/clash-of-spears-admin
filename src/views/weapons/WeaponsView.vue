@@ -12,7 +12,8 @@ provide<GenericView<Weapon>>(GenericViewKey, {
   createService: weapons.createWeapon,
   updateService: weapons.updateWeapon,
   removeService: weapons.deleteWeapon,
-  dialogForm: weaponForm
+  uploadService: weapons.postWeaponsBulk,
+  dialogForm: weaponForm,
 });
 
 const { GenericViewVue } = GenericView<Weapon>();
