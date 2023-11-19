@@ -1,5 +1,6 @@
 import {
   Dialog,
+  Notify,
   QBtn,
   QBtnProps,
   QCard,
@@ -8,8 +9,14 @@ import {
   QCardSection,
   QChip,
   QChipProps,
+  QFile,
+  QFileProps,
+  QForm,
+  QFormProps,
   QIcon,
   QIconProps,
+  QRejectedEntry,
+  QSpace,
   QTable,
   QTableColumn,
   QTableProps,
@@ -23,6 +30,8 @@ import { defaultListPaginatedResponseData } from 'src/data/default/FetchResponse
 import { t } from "src/plugins/I18n";
 import { is } from "src/utils/Is";
 import { genericFormDialog } from "./GenericFormDialog";
+import { useRules } from "src/composables/UseRules";
+import { MIME_TYPES } from "src/constants/MimeTypes";
 
 export type GenericView<T extends Record<string, any>> = _GenericViewType<T>;
 export const GenericView = <T extends Record<string, any> = Record<string, any>>() => {
@@ -48,7 +57,13 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
 
         const utilIs = is();
 
-        const loading = computed(() => $scope.tableService.isFetching || $scope.removeService.isFetching)
+        const file = ref();
+
+        const rules = useRules();
+
+        const loading = computed(() => $scope.tableService.isFetching
+          || $scope.uploadService?.isFetching
+          || $scope.removeService?.isFetching)
         const pagination = ref<Pagination>({
           ...defaultListPaginatedResponseData(),
           sortBy: '',
@@ -61,23 +76,47 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
           dialogTitle: props.dialogTitle,
         })
 
+        const submitFile = async () => {
+          await $scope.uploadService?.execute(file.value);
+          $scope.tableService.execute()
+        }
+
+        const onRejectFile = (rejectedEntries: QRejectedEntry[]) => {
+          console.log(rejectedEntries)
+          for (let i = 0; i < rejectedEntries.length; i++) {
+            Notify.create({
+              type: 'negative',
+              message: t('common.messages.rejectFile')
+                + rejectedEntries[i].file.name
+                + ' ' + rejectedEntries[i].failedPropValidation,
+            });
+          }
+        }
+
         async function onRequest() {
           if (!loading.value) {
             if ('pagination' in $scope.tableService) {
+              const listPagination = $scope.tableService.pagination;
               $scope.tableService.pagination = {
                 ...pagination.value,
+
+                rowsNumber: listPagination?.rowsNumber,
               };
             }
 
-            await $scope.tableService.execute()
+            await $scope.tableService.execute();
+
+            if ('pagination' in $scope.tableService) {
+              pagination.value.rowsNumber = $scope.tableService.pagination?.rowsNumber;
+            }
           }
         }
 
         onRequest();
 
         async function onRemove(item: T) {
-          await $scope.removeService.execute(item);
-          $scope.tableService.execute()
+          await $scope.removeService?.execute(item);
+          $scope.tableService.execute({ ...pagination.value })
         }
 
         function removeItem(item: T) {
@@ -179,15 +218,46 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
                   },
                 )
               ),
-              h(QCardActions, { align: 'right' } as QCardActionsProps,
-                $scope.createService ? () => h(QBtn, {
-                  label: t('common.buttons.add'),
-                  rounded: true,
-                  color: 'positive',
-                  unelevated: true,
-                  padding: 'sm xl',
-                  onClick: formDialog.openCreateDialog
-                } as QBtnProps) : undefined
+              h(QCardActions, { align: 'right', class: 'row items-start' } as QCardActionsProps,
+                () => [
+                  $scope.uploadService ? h(QForm, {
+                    onSubmit: submitFile,
+                    class: 'row items-start q-gutter-sm',
+                  } as QFormProps,
+                    () => [
+                      h(QFile, {
+                        modelValue: file.value,
+                        dense: true,
+                        label: t('common.labels.csvFile'),
+                        accept: MIME_TYPES.CSV.join(','),
+                        clearable: true,
+                        rules: [rules.isRequired],
+                        outlined: true,
+                        loading: loading.value,
+                        onRejected: onRejectFile,
+                        "onUpdate:modelValue": (val) => file.value = val,
+                      } as QFileProps),
+                      h(QBtn, {
+                        label: t('common.buttons.upload'),
+                        rounded: true,
+                        loading: loading.value,
+                        color: 'primary',
+                        unelevated: true,
+                        padding: 'sm xl',
+                        type: 'submit',
+                      })
+                    ]
+                  ) : undefined,
+                  h(QSpace),
+                  $scope.createService ? h(QBtn, {
+                    label: t('common.buttons.add'),
+                    rounded: true,
+                    color: 'positive',
+                    unelevated: true,
+                    padding: 'sm xl',
+                    onClick: formDialog.openCreateDialog,
+                  } as QBtnProps) : undefined,
+                ]
               ),
               formDialog.getDialog()
             ],

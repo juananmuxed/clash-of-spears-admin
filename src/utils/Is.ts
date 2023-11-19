@@ -1,4 +1,4 @@
-export const is = () => {/* eslint-disable @typescript-eslint/no-explicit-any */
+export const is = () => {
   function nullOrUndefined(value?: unknown): value is undefined | null {
     return value === null || value === undefined;
   }

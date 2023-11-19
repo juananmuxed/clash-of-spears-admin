@@ -15,7 +15,7 @@ export function genericFormDialog<T extends Record<string, any>>({
   const dialogVisible = ref(false);
 
   const itemsValues: Ref<Record<string, string | number | boolean | undefined>> = ref({});
-  const cardLoading = computed(() => $scope.createService.isFetching || $scope.updateService.isFetching);
+  const cardLoading = computed(() => $scope.createService?.isFetching || $scope.updateService?.isFetching);
 
   const openCreateDialog = () => {
     isCreatingItem.value = true;
@@ -40,12 +40,12 @@ export function genericFormDialog<T extends Record<string, any>>({
       let response: FetchResponse<unknown> | undefined;
 
       if (isCreatingItem.value) {
-        response = await $scope.createService.execute(itemsValues.value);
+        response = await $scope.createService?.execute(itemsValues.value);
       } else {
-        response = await $scope.updateService.execute(itemsValues.value);
+        response = await $scope.updateService?.execute(itemsValues.value);
       }
 
-      if (!response.isError) {
+      if (!response?.isError) {
         $scope.tableService.execute();
 
         closeDialog();
@@ -97,6 +97,7 @@ export function genericFormDialog<T extends Record<string, any>>({
   }
 
   function fillSelects() {
+    if (!$scope.dialogForm) return;
     for (let i = 0; i < $scope.dialogForm.length; i++) {
       const filter = $scope.dialogForm[i];
       if (filter.type === 'select' && filter.service) {
@@ -144,7 +145,7 @@ export function genericFormDialog<T extends Record<string, any>>({
                 {
                   class: 'row q-col-gutter-sm',
                 },
-                () => $scope.dialogForm.map((input) => renderFormItem(input))
+                () => $scope.dialogForm?.map((input) => renderFormItem(input))
               ),
               h(QCardActions,
                 {

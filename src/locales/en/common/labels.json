@@ -12,5 +12,6 @@
   "password": "Password",
   "types": "Types",
   "edit": "Edit",
-  "remove": "Remove"
+  "remove": "Remove",
+  "csvFile": "CSV file"
 }
