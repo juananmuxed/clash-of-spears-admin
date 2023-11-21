@@ -78,7 +78,7 @@ export const columns = [
     label: '',
     align: 'left',
   },
-] as QTableColumn<Weapon>[]
+] as QTableColumn<Weapon>[];
 
 export const weaponForm: FormItem[] = [
   {

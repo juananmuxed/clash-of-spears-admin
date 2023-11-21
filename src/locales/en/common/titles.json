@@ -4,5 +4,7 @@
   "editItem": "Edit {item}",
   "deleteItem": "Delete {item}",
   "item": "item",
-  "weapons": "weapon | weapons"
+  "weapons": "weapon | weapons",
+  "expansions": "expansion | expansions",
+  "armies": "army | armies"
 }

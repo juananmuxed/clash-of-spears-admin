@@ -26,14 +26,23 @@ const routes: RouteRecordRaw[] = [
       titleTag: 'menu.expansions',
       icon: 'fas fa-bolt',
     },
-    component: () => import('src/views/weapons/WeaponsView.vue'),
+    component: () => import('src/views/expansions/ExpansionsView.vue'),
+  },
+  {
+    path: 'armies',
+    name: 'armies',
+    meta: {
+      titleTag: 'menu.armies',
+      icon: 'fas fa-person-rifle',
+    },
+    component: () => import('src/views/expansions/ExpansionsView.vue'),
   },
   {
     path: 'weapons',
     name: 'weapons',
     meta: {
       titleTag: 'menu.weapons',
-      icon: 'fas fa-shield-halved',
+      icon: 'fas fa-gun',
     },
     component: () => import('src/views/weapons/WeaponsView.vue'),
   },

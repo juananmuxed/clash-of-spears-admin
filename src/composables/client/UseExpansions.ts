@@ -23,7 +23,9 @@ export const useExpansions = () => {
     { successMessage: t('common.messages.correctlyDeleted') },
   );
 
-  const getExpansionsPaginated = useFetchPaginated(expansionsApi.getExpansionsPaginated)
+  const getExpansionsPaginated = useFetchPaginated(expansionsApi.getExpansionsPaginated);
+
+  const postExpansionsBulk = useFetch(expansionsApi.postExpansionsBulk);
 
   return {
     getExpansions,
@@ -32,5 +34,6 @@ export const useExpansions = () => {
     updateExpansion,
     deleteExpansion,
     getExpansionsPaginated,
+    postExpansionsBulk,
   }
 }

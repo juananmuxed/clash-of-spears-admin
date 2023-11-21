@@ -13,5 +13,7 @@
   "types": "Types",
   "edit": "Edit",
   "remove": "Remove",
-  "csvFile": "CSV file"
+  "csvFile": "CSV file",
+  "active": "Active",
+  "book": "Book"
 }

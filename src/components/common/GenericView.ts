@@ -170,7 +170,7 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
 
         function renderBodyCell(row: T) {
           const val = row.value;
-          return utilIs.array(val) ? h(
+          if (utilIs.array(val)) return h(
             QTd,
             () => val
               .filter((item) => 'name' in item)
@@ -183,8 +183,13 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
                   size: 'sm'
                 } as QChipProps
               ))
-          )
-            : h(QTd, () => val)
+          );
+          if (utilIs.boolean(val)) return h(QTd,
+            () => h(QIcon, {
+              name: val ? 'fas fa-check' : 'fas fa-close',
+              color: val ? 'positive' : 'negative',
+            } as QIconProps));
+          return h(QTd, () => val);
         }
 
         return () => {

@@ -24,4 +24,8 @@ export class ExpansionsApi {
   async getExpansionsPaginated(pagination: Pagination) {
     return clientApi.getListPaginatedClient<Expansion, Pagination>(controller, 'admin', pagination)
   }
+
+  async postExpansionsBulk(file: File) {
+    return clientApi.postMultiPartClient(controller, 'bulk', { file })
+  }
 }

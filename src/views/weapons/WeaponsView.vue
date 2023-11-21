@@ -1,3 +1,11 @@
+<template>
+  <GenericViewVue
+    :columns="columns"
+    :title="$t('common.titles.weapons', 2)"
+    :dialog-title="$t('common.titles.weapons', 1)"
+  />
+</template>
+
 <script setup lang="ts">
 import { useWeapons } from "src/composables/client/UseWeapons";
 import { GenericViewKey } from "src/types/Symbols";
@@ -18,11 +26,3 @@ provide<GenericView<Weapon>>(GenericViewKey, {
 
 const { GenericViewVue } = GenericView<Weapon>();
 </script>
-
-<template>
-  <GenericViewVue
-    :columns="columns"
-    :title="$t('common.titles.weapons', 2)"
-    :dialog-title="$t('common.titles.weapons', 1)"
-  />
-</template>
