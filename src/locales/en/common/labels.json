@@ -15,5 +15,7 @@
   "remove": "Remove",
   "csvFile": "CSV file",
   "active": "Active",
-  "book": "Book"
+  "book": "Book",
+  "imgUrl": "Image URL",
+  "isWarParty": "War party"
 }

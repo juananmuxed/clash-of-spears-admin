@@ -35,7 +35,7 @@ const routes: RouteRecordRaw[] = [
       titleTag: 'menu.armies',
       icon: 'fas fa-person-rifle',
     },
-    component: () => import('src/views/expansions/ExpansionsView.vue'),
+    component: () => import('src/views/armies/ArmiesView.vue'),
   },
   {
     path: 'weapons',
