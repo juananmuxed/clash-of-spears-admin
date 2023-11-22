@@ -86,7 +86,7 @@ export const armyForm: FormItem[] = [
   {
     type: 'input',
     fieldProps: {
-      label: t('common.labels.imageUrl'),
+      label: t('common.labels.imgUrl'),
       hint: '',
     },
     queryName: 'imageUrl',

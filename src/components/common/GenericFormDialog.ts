@@ -75,7 +75,7 @@ export function genericFormDialog<T extends Record<string, any>>({
           {
             ...item.fieldProps,
             class: 'col-12 col-sm-6',
-            modelValue: itemsValues.value[item.queryName],
+            modelValue: itemsValues.value[item.queryName] || false,
             "onUpdate:modelValue": (newValue: boolean | undefined) => itemsValues.value[item.queryName] = newValue,
           }
         )

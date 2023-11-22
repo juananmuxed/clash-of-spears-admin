@@ -184,7 +184,7 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
                 } as QChipProps
               ))
           );
-          if (utilIs.boolean(val)) return h(QTd,
+          if (utilIs.boolean(val) || utilIs.nullOrUndefined(val)) return h(QTd,
             () => h(QIcon, {
               name: val ? 'fas fa-check' : 'fas fa-close',
               color: val ? 'positive' : 'negative',
