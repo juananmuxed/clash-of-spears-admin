@@ -17,5 +17,8 @@
   "active": "Active",
   "book": "Book",
   "imgUrl": "Image URL",
-  "isWarParty": "War party"
+  "isWarParty": "War party",
+  "special": "Special",
+  "value": "Value",
+  "requires": "Requires"
 }

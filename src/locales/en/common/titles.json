@@ -6,5 +6,7 @@
   "item": "item",
   "weapons": "weapon | weapons",
   "expansions": "expansion | expansions",
-  "armies": "army | armies"
+  "armies": "army | armies",
+  "armors": "armor | armors",
+  "traits": "trait | traits"
 }

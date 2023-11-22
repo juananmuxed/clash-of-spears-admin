@@ -1,7 +1,7 @@
 import { QTableColumn } from "quasar";
 import { useRules } from "src/composables/UseRules";
 import { useExpansions } from "src/composables/client/UseExpansions";
-import { Army } from "src/models/api/Armies";
+import { Trait } from "src/models/api/Traits";
 import { FormItem } from "src/models/common/Generics";
 import { t } from "src/plugins/I18n";
 
@@ -24,30 +24,30 @@ export const columns = [
     align: 'left',
   },
   {
-    name: 'active',
-    label: t('common.labels.active'),
-    field: 'active',
+    name: 'value',
+    label: t('common.labels.value'),
+    field: 'value',
     sortable: true,
     align: 'left',
   },
   {
-    name: 'imgUrl',
-    label: t('common.labels.imgUrl'),
-    field: 'imgUrl',
+    name: 'requires',
+    label: t('common.labels.requires'),
+    field: 'requires',
+    sortable: true,
+    align: 'left',
+  },
+  {
+    name: 'bookPage',
+    label: t('common.labels.bookPage'),
+    field: 'bookPage',
     sortable: true,
     align: 'left',
   },
   {
     name: 'expansionId',
-    label: t('common.labels.expansionId'),
-    field: 'expansionId',
-    sortable: true,
-    align: 'left',
-  },
-  {
-    name: 'isWarParty',
-    label: t('common.labels.isWarParty'),
-    field: 'isWarParty',
+    label: t('common.labels.expansion'),
+    field: (row) => row.book?.book,
     sortable: true,
     align: 'left',
   },
@@ -56,9 +56,9 @@ export const columns = [
     label: '',
     align: 'left',
   },
-] as QTableColumn<Army>[];
+] as QTableColumn<Trait>[];
 
-export const armyForm: FormItem[] = [
+export const traitForm: FormItem[] = [
   {
     type: 'input',
     fieldProps: {
@@ -79,17 +79,27 @@ export const armyForm: FormItem[] = [
   {
     type: 'switch',
     fieldProps: {
-      label: t('common.labels.active'),
+      label: t('common.labels.value'),
     },
-    queryName: 'active',
+    queryName: 'value',
+  },
+  {
+    type: 'switch',
+    fieldProps: {
+      label: t('common.labels.requires'),
+    },
+    queryName: 'requires',
   },
   {
     type: 'input',
     fieldProps: {
-      label: t('common.labels.imgUrl'),
+      label: t('common.labels.bookPage'),
+      mask: '#####',
       hint: '',
+      unmaskedValue: true,
+      rules: [rules.isRequired],
     },
-    queryName: 'imageUrl',
+    queryName: 'bookPage',
   },
   {
     type: 'select',
@@ -99,12 +109,5 @@ export const armyForm: FormItem[] = [
     },
     queryName: 'expansionId',
     service: expansions.getExpansionsSelect,
-  },
-  {
-    type: 'switch',
-    fieldProps: {
-      label: t('common.labels.isWarParty'),
-    },
-    queryName: 'isWarParty',
   },
 ];

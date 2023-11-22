@@ -47,6 +47,24 @@ const routes: RouteRecordRaw[] = [
     component: () => import('src/views/weapons/WeaponsView.vue'),
   },
   {
+    path: 'armors',
+    name: 'armors',
+    meta: {
+      titleTag: 'menu.armors',
+      icon: 'fas fa-shield-halved',
+    },
+    component: () => import('src/views/armors/ArmorsView.vue'),
+  },
+  {
+    path: 'traits',
+    name: 'traits',
+    meta: {
+      titleTag: 'menu.traits',
+      icon: 'fas fa-book',
+    },
+    component: () => import('src/views/traits/TraitsView.vue'),
+  },
+  {
     path: 'config',
     name: 'config',
     meta: {

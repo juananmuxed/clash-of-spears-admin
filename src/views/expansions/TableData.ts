@@ -73,6 +73,6 @@ export const expansionForm: FormItem[] = [
       label: t('common.labels.book'),
       hint: '',
     },
-    queryName: 'bookPage',
+    queryName: 'book',
   },
 ];

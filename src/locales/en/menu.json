@@ -5,5 +5,7 @@
   "config": "Configuration",
   "expansions": "Expansions",
   "weapons": "Weapons",
-  "armies": "Armies"
+  "armies": "Armies",
+  "armors": "Armors",
+  "traits": "Traits"
 }
