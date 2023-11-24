@@ -10,9 +10,9 @@ type MessageType = typeof en;
 
 export const i18n = createI18n({
   legacy: false,
-  locale: localStorage.getItem(LOCAL_STORAGE.LANG) || 'en',
-  fallbackLocale: localStorage.getItem(LOCAL_STORAGE.LANG) || 'en',
-  messages: { en },
+  locale: '',
+  fallbackLocale: 'en',
+  messages: {},
 });
 
 const localesMap = Object.fromEntries(
@@ -51,6 +51,7 @@ export async function loadLanguageAsync(lang: string): Promise<Locale> {
   if (loadedLanguages.includes(lang)) {
     return setI18nLanguage(lang);
   }
+  console.log(lang)
 
   const messages = await localesMap[lang]();
   i18n.global.setLocaleMessage(lang, messages.default as MessageType);
@@ -60,7 +61,6 @@ export async function loadLanguageAsync(lang: string): Promise<Locale> {
 
 export const installI18n = (app: App) => {
   app.use(i18n);
-  loadLanguageAsync(localStorage.getItem('lang') || 'en');
 };
 
 const { t } = i18n.global;
