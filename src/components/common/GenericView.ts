@@ -82,7 +82,6 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
         }
 
         const onRejectFile = (rejectedEntries: QRejectedEntry[]) => {
-          console.log(rejectedEntries)
           for (let i = 0; i < rejectedEntries.length; i++) {
             Notify.create({
               type: 'negative',

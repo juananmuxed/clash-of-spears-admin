@@ -51,7 +51,6 @@ export async function loadLanguageAsync(lang: string): Promise<Locale> {
   if (loadedLanguages.includes(lang)) {
     return setI18nLanguage(lang);
   }
-  console.log(lang)
 
   const messages = await localesMap[lang]();
   i18n.global.setLocaleMessage(lang, messages.default as MessageType);
