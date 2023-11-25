@@ -1,6 +1,6 @@
 {
   "name": "vue-m-template",
-  "version": "0.2.6",
+  "version": "0.3.0",
   "repository": "juananmuxed/clash-of-spears-admin",
   "scripts": {
     "dev": "vite",
