@@ -8,5 +8,6 @@
   "expansions": "expansion | expansions",
   "armies": "army | armies",
   "armors": "armor | armors",
-  "traits": "trait | traits"
+  "traits": "trait | traits",
+  "traitsValues": "trait value | traits values"
 }

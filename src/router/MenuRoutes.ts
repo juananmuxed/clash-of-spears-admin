@@ -65,6 +65,15 @@ const routes: RouteRecordRaw[] = [
     component: () => import('src/views/traits/TraitsView.vue'),
   },
   {
+    path: 'traits-values',
+    name: 'traitsValues',
+    meta: {
+      titleTag: 'menu.traitsValues',
+      icon: 'fas fa-book-bookmark',
+    },
+    component: () => import('src/views/traitsValues/TraitsValuesView.vue'),
+  },
+  {
     path: 'config',
     name: 'config',
     meta: {

@@ -1,12 +1,14 @@
 import { QTableColumn } from "quasar";
 import { useRules } from "src/composables/UseRules";
 import { useExpansions } from "src/composables/client/UseExpansions";
+import { useTraitsValues } from "src/composables/client/UseTraitsValues";
 import { Trait } from "src/models/api/Traits";
 import { FormItem } from "src/models/common/Generics";
 import { t } from "src/plugins/I18n";
 
 const rules = useRules();
 const expansions = useExpansions();
+const traitsValues = useTraitsValues();
 
 export const columns = [
   {
@@ -24,9 +26,9 @@ export const columns = [
     align: 'left',
   },
   {
-    name: 'value',
+    name: 'valueId',
     label: t('common.labels.value'),
-    field: 'value',
+    field: 'valueId',
     sortable: true,
     align: 'left',
   },
@@ -77,11 +79,13 @@ export const traitForm: FormItem[] = [
     queryName: 'name',
   },
   {
-    type: 'switch',
+    type: 'select',
     fieldProps: {
       label: t('common.labels.value'),
+      hint: '',
     },
-    queryName: 'value',
+    queryName: 'valueId',
+    service: traitsValues.getTraitsValuesSelect,
   },
   {
     type: 'switch',

@@ -9,6 +9,8 @@ export const useWeapons = () => {
 
   const getWeapons = useFetch(weaponsApi.getWeapons);
 
+  const getWeaponsSelect = useFetchSelect(weaponsApi.getWeapons, { optionLabel: 'name' })
+
   const createWeapon = useFetch(weaponsApi.createWeapon,
     { successMessage: t('common.messages.correctlyCreated') },
   );
@@ -29,6 +31,7 @@ export const useWeapons = () => {
 
   return {
     getWeapons,
+    getWeaponsSelect,
     createWeapon,
     updateWeapon,
     deleteWeapon,

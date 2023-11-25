@@ -20,5 +20,7 @@
   "isWarParty": "War party",
   "special": "Special",
   "value": "Value",
-  "requires": "Requires"
+  "requires": "Requires",
+  "weapon": "Weapon",
+  "armor": "Armor"
 }
