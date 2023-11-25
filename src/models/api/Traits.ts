@@ -6,7 +6,7 @@ export type Trait = {
   id: number;
   name: string;
   requires?: boolean;
-  value?: boolean;
+  value?: TraitValue;
   bookPage?: number;
   expansionId?: number;
   book?: Expansion;

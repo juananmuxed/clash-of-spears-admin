@@ -5,10 +5,12 @@ import { useTraitsValues } from "src/composables/client/UseTraitsValues";
 import { Trait } from "src/models/api/Traits";
 import { FormItem } from "src/models/common/Generics";
 import { t } from "src/plugins/I18n";
+import { is } from "src/utils/Is";
 
 const rules = useRules();
 const expansions = useExpansions();
 const traitsValues = useTraitsValues();
+const isUtil = is();
 
 export const columns = [
   {
@@ -28,7 +30,9 @@ export const columns = [
   {
     name: 'valueId',
     label: t('common.labels.value'),
-    field: 'valueId',
+    field: (row) => row.value?.armor || row.value?.weapon
+      ? row.value?.weapon?.name || row.value?.armor?.name
+      : row.value?.value,
     sortable: true,
     align: 'left',
   },
