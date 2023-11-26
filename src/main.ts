@@ -11,10 +11,10 @@ const app = createApp(App);
 
 async function init() {
   installI18n(app);
+  installQuasar(app);
   await loadLanguageAsync(localStorage.getItem(LOCAL_STORAGE.LANG) || 'en');
   installPinia(app);
   installRouter(app);
-  installQuasar(app);
 
   app.mount('#app');
 }
