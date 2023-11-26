@@ -33,7 +33,7 @@ export function useFetchSelect <T extends Fetch>(...args: UseFetchSelectArgs<T>)
   const response = toRefs<UseFetch<T>>(useFetch(request, _options));
 
   const selectBind = useSelectBind(response.data, response.isFetching, options);
-
+  //@ts-ignore
   const shell = reactive({
     ...response,
     selectBind,
