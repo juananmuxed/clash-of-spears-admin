@@ -4,27 +4,6 @@
       <QToolbar>
         <QBtn flat round icon="fas fa-bars" class="q-mr-sm" @click="switchDrawer" />
         <QToolbarTitle>{{ $t("common.titles.adminForClash") }}</QToolbarTitle>
-        <QBtn
-          v-if="availableLocales.length !== 1"
-          flat
-          round
-          dense
-          icon="fas fa-earth"
-          class="q-ml-sm"
-        >
-          <QMenu>
-            <QList>
-              <QItem
-                v-for="lang in availableLocales"
-                clickable
-                v-close-popup
-                @click="loadLanguageAsync(lang.value)"
-              >
-                <QItemSection>{{ lang.label }}</QItemSection>
-              </QItem>
-            </QList>
-          </QMenu>
-        </QBtn>
         <QBtn icon="fas fa-user" round flat>
           <QMenu transition="jump-up">
             <QList>
@@ -35,6 +14,30 @@
                 </QItemSection>
               </QItem>
               <QSeparator />
+              <QItem v-if="moreThanOneLocales">
+                <QItemSection>
+                  <QSelect
+                    v-model="lang"
+                    dense
+                    borderless
+                    :options="availableLocales"
+                  >
+                    <template #prepend>
+                      <QImg width="1.4rem" fit="contain" :src="lang?.avatar" class="mr-2" />
+                    </template>
+                    <template #option="scope">
+                      <QItem v-bind="scope.itemProps">
+                        <QItemSection avatar>
+                          <QImg width="2rem" fit="contain" :src="scope.opt.avatar" />
+                        </QItemSection>
+                        <QItemSection>
+                          {{ scope.opt.label }}
+                        </QItemSection>
+                      </QItem>
+                    </template>
+                  </QSelect>
+                </QItemSection>
+              </QItem>
               <QItem clickable @click="$q.dark.toggle">
                 <QItemSection avatar>
                   <QIcon
@@ -134,6 +137,7 @@ import { loadLanguageAsync, availableLocales } from "src/plugins/I18n";
 import { getMenu } from "src/router/MenuRoutes";
 import { useQuasar } from "quasar";
 import { useUserStore } from "src/stores/UseUserStore";
+import { LOCAL_STORAGE } from "src/constants/Keys";
 
 const $q = useQuasar();
 const user = useUserStore();
@@ -144,4 +148,14 @@ const leftDrawerOpen = ref(false);
 function switchDrawer() {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 }
+
+const langToken = localStorage.getItem(LOCAL_STORAGE.LANG) || 'en';
+
+const lang = ref(availableLocales.find((locale) => locale.value === langToken));
+
+const moreThanOneLocales = computed(() => availableLocales.length > 1);
+
+watch(lang, (newValue) => {
+  loadLanguageAsync(newValue?.value || 'en');
+});
 </script>

@@ -1,0 +1,14 @@
+{
+  "adminForClash": "Administration page for Clash of Spears API",
+  "newItem": "Create {item}",
+  "editItem": "Edit {item}",
+  "deleteItem": "Delete {item}",
+  "item": "item",
+  "weapons": "weapon | weapons",
+  "expansions": "expansion | expansions",
+  "armies": "army | armies",
+  "armors": "armor | armors",
+  "traits": "trait | traits",
+  "traitsValues": "trait value | traits values",
+  "options": "option | options"
+}
