@@ -10,5 +10,10 @@
   "armors": "armor | armors",
   "traits": "trait | traits",
   "traitsValues": "trait value | traits values",
-  "options": "option | options"
+  "options": "option | options",
+  "welcome": "Welcome",
+  "sections": "Sections",
+  "expansionsAvailable": "Available expansions",
+  "componentsWebs": "Friend webs for hobby",
+  "news": "News"
 }

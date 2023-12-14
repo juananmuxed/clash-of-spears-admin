@@ -1,0 +1,7 @@
+{
+  "welcome01": "Este sitio web te permite editar o crear para la API de Clash of Spears, el juego de miniaturas <b>Clash of Spears</b>. Podrás <b>crear, editar o eliminar</b> todos los ejercitos disponibles para las diferentes expansiones.",
+  "welcome02": "Eres más que bienvenido a usar esta web para disfrutar al máximo de este juego.",
+  "news01": "Lanzada versión 1.0.0",
+  "webs01": "Si necesitas algún complemento para jugar al Clash of Spears, visita <a href='https://caliga.net/'>Caliga</a>",
+  "listAllChanges": "Listado completo de <a href=\"{url}\" target=\"_blank\">todos los cambios</a>"
+}

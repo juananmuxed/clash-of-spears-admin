@@ -3,7 +3,7 @@
     <QHeader elevated class="text-white">
       <QToolbar>
         <QBtn flat round icon="fas fa-bars" class="q-mr-sm" @click="switchDrawer" />
-        <QToolbarTitle>{{ $t("common.titles.adminForClash") }}</QToolbarTitle>
+        <QToolbarTitle><RouterLink :to="{ name: 'home'}">{{ $t("common.titles.adminForClash") }}</RouterLink></QToolbarTitle>
         <QBtn icon="fas fa-user" round flat>
           <QMenu transition="jump-up">
             <QList>
