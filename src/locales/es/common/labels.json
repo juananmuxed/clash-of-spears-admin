@@ -1,6 +1,8 @@
 {
   "id": "Id",
   "name": "Nombre",
+  "role": "Rol",
+  "username": "Nombre usuario",
   "rangeShort": "Rango corto",
   "rangeLong": "Rango largo",
   "saveModification": "Modificación a la salvación",

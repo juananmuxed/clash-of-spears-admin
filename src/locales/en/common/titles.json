@@ -8,6 +8,8 @@
   "expansions": "expansion | expansions",
   "armies": "army | armies",
   "armors": "armor | armors",
+  "roles": "role | roles",
+  "users": "user | users",
   "traits": "trait | traits",
   "traitsValues": "trait value | traits values",
   "options": "option | options",
