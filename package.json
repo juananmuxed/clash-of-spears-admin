@@ -1,6 +1,6 @@
 {
   "name": "clash-of-spears-admin",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "repository": "juananmuxed/clash-of-spears-admin",
   "type": "module",
   "scripts": {
