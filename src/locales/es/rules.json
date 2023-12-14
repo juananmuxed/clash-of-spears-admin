@@ -1,4 +1,4 @@
 {
-  "requiredField": "Required field",
-  "invalidEmail": "Invalid email"
+  "requiredField": "Campo requerido",
+  "invalidEmail": "Email inválido"
 }
