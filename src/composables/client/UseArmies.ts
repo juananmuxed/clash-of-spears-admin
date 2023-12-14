@@ -2,11 +2,14 @@ import { ArmiesApi } from "src/services/api/ArmiesApi"
 import { useFetch } from "../fetch/UseFetch"
 import { t } from "src/plugins/I18n";
 import { useFetchPaginated } from "../fetch/UseFetchPaginated";
+import { useFetchSelect } from "../fetch/UseFetchSelect";
 
 export const useArmies = () => {
   const weaponsApi = new ArmiesApi();
 
   const getArmies = useFetch(weaponsApi.getArmies);
+
+  const getArmiesSelect = useFetchSelect(weaponsApi.getArmies, { optionLabel: 'name' });
 
   const createArmy = useFetch(weaponsApi.createArmy,
     { successMessage: t('common.messages.correctlyCreated') },
@@ -26,6 +29,7 @@ export const useArmies = () => {
 
   return {
     getArmies,
+    getArmiesSelect,
     createArmy,
     updateArmy,
     deleteArmy,

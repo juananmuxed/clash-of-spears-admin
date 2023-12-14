@@ -9,5 +9,6 @@
   "armies": "army | armies",
   "armors": "armor | armors",
   "traits": "trait | traits",
-  "traitsValues": "trait value | traits values"
+  "traitsValues": "trait value | traits values",
+  "options": "option | options"
 }

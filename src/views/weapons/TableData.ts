@@ -163,6 +163,8 @@ export const weaponForm: FormItem[] = [
     fieldProps: {
       label: t('common.labels.types'),
       multiple: true,
+      useChips: true,
+      clearable: true,
     },
     queryName: 'types',
     service: weapons.getWeaponTypesSelect,

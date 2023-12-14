@@ -9,7 +9,7 @@ export const useArmors = () => {
 
   const getArmors = useFetch(armorsApi.getArmors);
 
-  const getArmorsSelect = useFetchSelect(armorsApi.getArmors, { optionLabel: 'name' })
+  const getArmorsSelect = useFetchSelect(armorsApi.getArmors, { optionLabel: 'name' });
 
   const createArmor = useFetch(armorsApi.createArmor,
     { successMessage: t('common.messages.correctlyCreated') },

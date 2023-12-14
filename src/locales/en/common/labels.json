@@ -22,5 +22,19 @@
   "value": "Value",
   "requires": "Requires",
   "weapon": "Weapon",
-  "armor": "Armor"
+  "armor": "Armor",
+  "cost": "Cost",
+  "barding": "Barding",
+  "body": "Body",
+  "shield": "Shield",
+  "fixedCost": "Fixed cost",
+  "fixedUnits": "Fixed units",
+  "armies": "Armies",
+  "incompatibleShields": "Incompatible shields",
+  "neededWeapons": "Needed weapons",
+  "incompatibleWeapons": "Incompatible weapons",
+  "upgradeTraits": "Upgrade traits",
+  "neededTraits": "Needed traits",
+  "removeTraits": "Remove traits",
+  "incompatibleTraits": "Incompatible traits"
 }

@@ -5,12 +5,10 @@ import { useTraitsValues } from "src/composables/client/UseTraitsValues";
 import { Trait } from "src/models/api/Traits";
 import { FormItem } from "src/models/common/Generics";
 import { t } from "src/plugins/I18n";
-import { is } from "src/utils/Is";
 
 const rules = useRules();
 const expansions = useExpansions();
 const traitsValues = useTraitsValues();
-const isUtil = is();
 
 export const columns = [
   {

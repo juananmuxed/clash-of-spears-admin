@@ -74,6 +74,15 @@ const routes: RouteRecordRaw[] = [
     component: () => import('src/views/traitsValues/TraitsValuesView.vue'),
   },
   {
+    path: 'options',
+    name: 'options',
+    meta: {
+      titleTag: 'menu.options',
+      icon: 'fas fa-flask-vial',
+    },
+    component: () => import('src/views/options/OptionsView.vue'),
+  },
+  {
     path: 'config',
     name: 'config',
     meta: {

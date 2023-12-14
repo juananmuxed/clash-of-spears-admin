@@ -176,7 +176,7 @@ export const GenericView = <T extends Record<string, any> = Record<string, any>>
               .map((item) => h(
                 QChip,
                 {
-                  label: item.name,
+                  label: item.name + (item.valueId ? '(' + item.valueId + ')' : ''),
                   color: 'secondary',
                   textColor: 'white',
                   size: 'sm'
