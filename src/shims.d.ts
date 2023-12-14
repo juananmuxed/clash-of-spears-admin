@@ -8,5 +8,6 @@ declare module 'vue-router' {
     name?: string;
     noMenu?: true;
     backTo?: true | string;
+    roles?: number[];
   }
 }

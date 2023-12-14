@@ -55,9 +55,11 @@ router.beforeEach((to, from, next) => {
 
   if (!authRequired && user.validToken) next({ name: 'home' });
 
+
   if (authRequired && !user.validToken) {
     next({ name: 'login' });
   } else {
-    next();
+    if (!user.isValidRole(to.meta.roles)) next({name: 'home'});
+    else next();
   }
 })

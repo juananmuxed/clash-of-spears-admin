@@ -1,3 +1,4 @@
+import { ROLES } from 'src/constants/Roles';
 import { RouteRecordRaw } from 'vue-router';
 
 export type IMenuItem = {
@@ -6,6 +7,7 @@ export type IMenuItem = {
   icon?: string;
   // eslint-disable-next-line no-use-before-define
   children?: IMenuItem[];
+  roles?: number[];
 }
 type Menu = IMenuItem[]
 
@@ -25,6 +27,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       titleTag: 'menu.expansions',
       icon: 'fas fa-bolt',
+      roles: [ROLES.ADMIN, ROLES.EDITOR],
     },
     component: () => import('src/views/expansions/ExpansionsView.vue'),
   },
@@ -34,6 +37,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       titleTag: 'menu.armies',
       icon: 'fas fa-person-rifle',
+      roles: [ROLES.ADMIN, ROLES.EDITOR],
     },
     component: () => import('src/views/armies/ArmiesView.vue'),
   },
@@ -43,6 +47,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       titleTag: 'menu.weapons',
       icon: 'fas fa-gun',
+      roles: [ROLES.ADMIN, ROLES.EDITOR],
     },
     component: () => import('src/views/weapons/WeaponsView.vue'),
   },
@@ -52,6 +57,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       titleTag: 'menu.armors',
       icon: 'fas fa-shield-halved',
+      roles: [ROLES.ADMIN, ROLES.EDITOR],
     },
     component: () => import('src/views/armors/ArmorsView.vue'),
   },
@@ -61,6 +67,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       titleTag: 'menu.traits',
       icon: 'fas fa-book',
+      roles: [ROLES.ADMIN, ROLES.EDITOR],
     },
     component: () => import('src/views/traits/TraitsView.vue'),
   },
@@ -70,6 +77,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       titleTag: 'menu.traitsValues',
       icon: 'fas fa-book-bookmark',
+      roles: [ROLES.ADMIN, ROLES.EDITOR],
     },
     component: () => import('src/views/traitsValues/TraitsValuesView.vue'),
   },
@@ -79,6 +87,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       titleTag: 'menu.options',
       icon: 'fas fa-flask-vial',
+      roles: [ROLES.ADMIN, ROLES.EDITOR],
     },
     component: () => import('src/views/options/OptionsView.vue'),
   },
@@ -88,6 +97,7 @@ const routes: RouteRecordRaw[] = [
     meta: {
       titleTag: 'menu.config',
       icon: 'fas fa-gear',
+      roles: [ROLES.ADMIN],
     },
     children: [
       {
@@ -96,8 +106,19 @@ const routes: RouteRecordRaw[] = [
         meta: {
           titleTag: 'menu.users',
           icon: 'fas fa-users',
+          roles: [ROLES.ADMIN],
         },
-        component: () => import('src/views/weapons/WeaponsView.vue'),
+        component: () => import('src/views/users/UsersView.vue'),
+      },
+      {
+        path: 'roles',
+        name: 'roles',
+        meta: {
+          titleTag: 'menu.roles',
+          icon: 'fas fa-scale-balanced',
+          roles: [ROLES.ADMIN],
+        },
+        component: () => import('src/views/roles/RolesView.vue'),
       },
     ]
   },
@@ -111,6 +132,7 @@ function routeToMenu(route: RouteRecordRaw) {
     titleTag: route.meta?.titleTag || route.name || '',
     icon: route.meta?.icon,
     url: hasChildren ? undefined : route.name,
+    roles: route.meta?.roles,
     children: activeChildren?.map(routeToMenu).filter((child) => child) as Menu,
   } as IMenuItem;
 

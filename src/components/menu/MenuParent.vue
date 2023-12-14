@@ -1,5 +1,5 @@
 <template>
-  <template v-if="menu.children?.length">
+  <template v-if="menu.children?.length && user.isValidRole(menu.roles)">
     <QExpansionItem
       :icon="menu.icon"
       :label="$t(menu.titleTag)"
@@ -18,8 +18,11 @@
 </template>
 
 <script setup lang="ts">
+import { useUserStore } from 'src/stores/UseUserStore';
 import MenuItem from 'src/components/menu/MenuItem.vue';
 import { IMenuItem } from 'src/router/MenuRoutes';
+
+const user = useUserStore()
 
 defineProps({
   menu: { type: Object as PropType<IMenuItem>, required: true },

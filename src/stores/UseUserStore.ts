@@ -117,6 +117,13 @@ export const useUserStore = defineStore('user', () => {
     return token.value
   }
 
+  function isValidRole(roles?: number[]){
+    if(!roles) return true;
+    if(tokenPayload.value && tokenPayload.value.roleId
+      && roles.includes(tokenPayload.value?.roleId)) return true;
+      return false;
+  }
+
   return {
     userLogin,
     tokenPayload,
@@ -126,5 +133,6 @@ export const useUserStore = defineStore('user', () => {
     login,
     logout,
     refreshTokenHandler,
+    isValidRole,
   }
 })
