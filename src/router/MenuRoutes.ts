@@ -92,6 +92,16 @@ const routes: RouteRecordRaw[] = [
     component: () => import('src/views/options/OptionsView.vue'),
   },
   {
+    path: 'units',
+    name: 'units',
+    meta: {
+      titleTag: 'menu.units',
+      icon: 'fas fa-skull',
+      roles: [ROLES.ADMIN, ROLES.EDITOR],
+    },
+    component: () => import('src/views/units/UnitsView.vue'),
+  },
+  {
     path: 'config',
     name: 'config',
     meta: {

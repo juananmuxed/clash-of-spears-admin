@@ -13,6 +13,7 @@
   "traits": "trait | traits",
   "traitsValues": "trait value | traits values",
   "options": "option | options",
+  "units": "unit | units",
   "welcome": "Welcome",
   "sections": "Sections",
   "expansionsAvailable": "Available expansions",
